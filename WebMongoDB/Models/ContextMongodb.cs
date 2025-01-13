@@ -49,5 +49,12 @@ namespace WebMongoDB.Models
                 return _database.GetCollection<Usuario>("Usuario");
             }
         }
+        public IMongoCollection<Transacao> Transacao
+        {
+            get
+            {
+                return _database.GetCollection<Transacao>("Transação");
+            }
+        }
     }
 }

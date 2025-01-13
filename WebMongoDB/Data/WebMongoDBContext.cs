@@ -15,5 +15,6 @@ namespace WebMongoDB.Data
         }
 
         public DbSet<WebMongoDB.Models.Usuario> Usuario { get; set; } = default!;
+        public DbSet<WebMongoDB.Models.Transacao> Transacao { get; set; } = default!;
     }
 }
