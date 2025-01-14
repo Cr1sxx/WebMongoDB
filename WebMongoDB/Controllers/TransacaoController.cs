@@ -144,5 +144,66 @@ namespace WebMongoDB.Controllers
 
             return transacao;
         }
+
+        //Soma de transações
+        public ActionResult Sum()
+        {
+            ContextMongodb dbContext = new ContextMongodb();
+            var transacao = dbContext.Transacao.Find(_ => true).ToList();
+            var total = transacao.Sum(t => t.Amount);
+
+            var totalTransacao = new SomTransacao
+            {
+                Total = total
+            };
+
+            dbContext.SomaTransacao.InsertOne(totalTransacao);
+            
+            ViewBag.Total = total;
+            return View(transacao);
+        }
+
+        //Transações: Filtro por data
+        public ActionResult FilterByDate(DateTime? startDate, DateTime? endDate)
+        {
+            var dbContext = new ContextMongodb();
+
+            if (startDate == null || endDate == null)
+            {
+                ViewBag.ErrorMessage = "Por favor, informe as datas de início e fim.";
+                return View(new List<Transacao>());
+            }
+
+            var transacoes = dbContext.Transacao
+                .Find(t => t.Data >= startDate && t.Data <= endDate)
+                .ToList();
+
+            ViewBag.StartDate = startDate.Value.ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate.Value.ToString("yyyy-MM-dd");
+
+            return View(transacoes);
+        }
+
+        //Transações: Filtro por categoria
+        public ActionResult FilterByCategory(string category)
+        {
+            var dbContext = new ContextMongodb();
+
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                ViewBag.ErrorMessage = "Por favor, informe uma categoria.";
+                return View(new List<Transacao>());
+            }
+
+            var transacoes = dbContext.Transacao
+                .Find(t => t.Category.ToLower() == category.ToLower())
+                .ToList();
+            
+            ViewBag.Category = category;
+
+            return View(transacoes);
+        }
+
+
     }
 }

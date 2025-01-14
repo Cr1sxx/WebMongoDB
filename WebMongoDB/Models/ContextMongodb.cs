@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
+﻿using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 
@@ -54,6 +53,13 @@ namespace WebMongoDB.Models
             get
             {
                 return _database.GetCollection<Transacao>("Transação");
+            }
+        }
+        public IMongoCollection<SomTransacao> SomaTransacao
+        {
+            get
+            {
+                return _database.GetCollection<SomTransacao>("Soma");
             }
         }
     }

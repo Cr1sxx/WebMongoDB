@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using WebMongoDB.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace WebMongoDB.Data
 {
@@ -16,5 +11,6 @@ namespace WebMongoDB.Data
 
         public DbSet<WebMongoDB.Models.Usuario> Usuario { get; set; } = default!;
         public DbSet<WebMongoDB.Models.Transacao> Transacao { get; set; } = default!;
+        public DbSet<WebMongoDB.Models.SomTransacao> SomTransacao { get; set; } = default!;
     }
 }

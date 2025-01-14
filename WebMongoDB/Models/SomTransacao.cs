@@ -6,32 +6,24 @@ using MongoDB.Bson.Serialization.Serializers;
 
 namespace WebMongoDB.Models
 {
-    [Table("Transação")]
-    public class Transacao
+    [Table("Soma Transações")]
+    public class SomTransacao
     {
         [Column("Id")]
         [Display(Name = "Código")]
         public Guid Id { get; set; }
 
-        [Column("Data")]
-        [Display(Name = "Data")]
-        public DateTime Data { get; set; }
-
-        [Column("Valor")]
-        [Display(Name = "Valor")]
-        public long Amount { get; set; }
-
-        [Column("Categoria")]
-        [Display(Name = "Categoria")]
-        public string Category { get; set; }
+        [Column("Total")]
+        [Display(Name = "Total")]
+        public double Total { get; set; }
 
         public static class MongoDbClassMap
         {
             public static void RegisterClassMaps()
             {
-                if (!BsonClassMap.IsClassMapRegistered(typeof(Transacao)))
+                if (!BsonClassMap.IsClassMapRegistered(typeof(SomTransacao)))
                 {
-                    BsonClassMap.RegisterClassMap<Transacao>(cm =>
+                    BsonClassMap.RegisterClassMap<SomTransacao>(cm =>
                     {
                         cm.AutoMap();
                         cm.MapIdProperty(t => t.Id)

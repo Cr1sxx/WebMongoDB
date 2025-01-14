@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebMongoDB.Models.Transacao>
+
+@{
+    ViewData["Title"] = "Sum";
+}
+
+<h1>Soma das Transações</h1>
+
+<h4>Transações</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Data.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Amount.ToString("C")</td>
+                        <td>@item.Category</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Total Calculado:</h3>
+        <p class="lead text-success">@ViewBag.Total.ToString("C")</p>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Voltar para a Lista</a>
+</div>
+
